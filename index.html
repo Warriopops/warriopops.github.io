@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous">
+  
+  <title>Thomas Laizé | CV</title>
+</head>
+<body>
+  <div class="game-board">
+    <audio controls preload="metadata" loop class="audio" hidden="true">
+      <source src="src/assets/Eric Skiff - Underclocked ♫ NO COPYRIGHT 8-bit Music + Background (1).mp3">
+    </audio>
+
+    <img src="src/assets/Blue_Modern_Cloud_Service_Logo__12_-removebg-preview.png" class="clouds">
+    <img src="src/assets/icegif-1258.gif" class="mario">
+    <img src="src/assets/Clic_ici_pour_voir_mon_CV-removebg-preview.png" class="bulle">
+    <img src="src/assets/images-removebg-preview.png" class="pipe">
+    <div class="menu">
+      <i class="fa-solid fa-volume-xmark fa-5x music"></i>
+      <i class="fa-solid fa-play fa-5x pause"></i>
+      <i class="fa-solid fa-arrow-rotate-left fa-5x refresh"></i>
+    </div>
+    <div class="score">
+      <h2 id="scoreDisplay">Score : 0 m</h2>
+    </div>
+    <button class="start-button">START</button>
+    <div class="background gameover">
+        <img src="src/assets/photo-1619410283995-43d9134e7656.avif" />
+      </div>
+  </div>
+
+  <div id="modal">
+    <div>
+      <img src="src/assets/CV.jpg" width="600vw" height="700vw" id="cv">
+    </div>
+  </div>
+
+  <audio controls preload="metadata" class="audio-jump" hidden="true">
+    <source src="src/assets/Jump sound effect - No copyright.mp3 ">
+  </audio>
+  <audio controls preload="metadata" class="audio-game-over" hidden="true">
+    <source src="src/assets/Arcade game over sound effect!.mp3">
+  </audio>
+
+  <div class="border">
+  </div>
+  
+</body>
+</html>
+
+<style scoped>
+  
+  *{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  html {
+    overflow: hidden;
+  }
+  .background {
+    position: absolute;
+    z-index: -10;
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+  .background::before {
+    content: '';
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    backdrop-filter: blur(2px);
+    z-index: 0;
+    background: black;
+    opacity: 0.4;
+    transition-duration: 0.5s;
+  }
+  .background.gameover::before {
+    opacity: 0.7;
+  }
+  .background img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .game-board{
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+  }
+  .audio{
+    position:fixed
+  }
+  .pipe{
+    position: absolute;
+    bottom: 5vh;
+    width: 12vh;
+    height: 10vh;
+    animation: pipe-animation 2s infinite linear;
+    animation-play-state: paused;
+    object-fit: cover;
+    overflow: visible
+  }
+  .mario{
+    width: 12vh;
+    position: absolute;
+    bottom: 5vh;
+  }
+  .bulle{
+    position: absolute;
+    bottom: 10vh;
+    margin-left: 7vh;
+    width: 15vh;
+    z-index: 1;
+    display: none;
+  }
+  .jump{
+    animation: jump 600ms;
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+  }
+  .clouds{
+    position: absolute;
+    width: 50vh;
+    margin-top: 20vh;
+    animation: clouds-animation 10s infinite ease-in-out;
+    animation-play-state: paused;
+  }
+  .border{
+    position: absolute;
+    background-image: url("src/assets/testo.jpeg");
+    background-size: contain;
+    bottom: 0;
+    height: 5vh;
+    width: 100vw;
+  }
+  #modal {
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    top:  16vw;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  #modal div {
+    margin: 100px auto;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+    border: 3px solid #cccccc;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+  }
+  #modal img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  .menu{
+    background-color: #222831;
+    width:20vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2vh;
+    margin-left: 20px;
+    border: 2px solid #393E46;
+  }
+  .menu i, .menu h2{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #c0b7b7;
+    font-size: 4vh;
+  }
+  .menu i:hover{
+    cursor: pointer;
+    color:white;
+  }
+  
+  .start-button {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12vh;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 3px solid rgb(0, 63, 0);
+    margin: auto;
+    margin-top:20vh;
+    display: block;
+  }
+
+
+  
+  .start-button:hover {
+    background-color: #20e229;
+  }
+  .score{
+    background-color: #222831;
+    width:20vh;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 2vh;
+    margin-left: 20px;
+    border: 2px solid #393E46;
+    z-index: 2;
+  }
+  .score h2{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+  }
+  @keyframes pipe-animation{
+    from {
+      right: -200px;
+    }
+    to {
+      right: calc(100% + 24vh)
+    }
+  }
+  @keyframes jump{
+    0%{
+      bottom: 5vh;
+    }
+    25%{
+      bottom: 27vh;
+    }
+    40%{
+      bottom: 27vh;
+    }
+    100%{
+      bottom: 5vh;
+    }
+  }
+  @keyframes clouds-animation{
+    0%{
+      left: calc(100vw + 25vh)
+    }
+    40%{
+      left: calc(50vw - 25vh)
+    }
+    60%{
+      left: calc(50vw - 25vh)
+    }
+    100%{
+      left: calc(0% - 50vh - 10vw);
+    }
+  }
+  @keyframes test-animation{
+    from{
+      right: 0;
+    }
+    to{
+      right:100%;
+    }
+  }
+  @keyframes language-animation{
+    from{
+      right: -1200px;
+    }
+    to{
+      right:100%
+    }
+  }
+  
+  
+</style>
+
+<script>
+  let myscore = 0;
+  let gameRunning = false;
+  let cvOpened = false;
+
+  const images = {
+    mario: "src/assets/1665458081_9040_gif-url.gif",
+    cloud: [
+    'src/assets/Blue_Modern_Cloud_Service_Logo__4_-removebg-preview.png',
+    'src/assets/Blue_Modern_Cloud_Service_Logo__5_-removebg-preview.png',
+    'src/assets/Blue_Modern_Cloud_Service_Logo__6_-removebg-preview.png',
+    'src/assets/Blue_Modern_Cloud_Service_Logo__7_-removebg-preview.png'
+    ],
+    obstacles: [
+    'src/assets/kisspng-html-css-design-and-build-web-sites-web-develop-5af50c33d59ff9.681459051526008883875-removebg-preview.png',
+    'src/assets/téléchargement-removebg-preview.png',
+    'src/assets/Vue-removebg-preview.png',
+    'src/assets/pngwing.com (1).png',
+    'src/assets/pngegg.png',
+    'src/assets/62c48bbdd884e8c372162223.png',
+    'src/assets/62debc4fff3c6e4b8b5de8d3.png',
+    ],
+    cv: {
+      openButton: 'src/assets/Clic_ici_pour_voir_mon_CV-removebg-preview.png',
+      closeButton: 'src/assets/cv2.png',
+    },
+  }
+  
+  // Elements
+  const background = document.querySelector(".background");
+  const modal = document.getElementById("modal");
+  const scoreDisplay = document.getElementById('scoreDisplay');
+  const music = document.querySelector('.music');
+  const audio_jump = document.querySelector('.audio-jump');
+  const audio_game_over = document.querySelector('.audio-game-over');
+  const mario = document.querySelector(".mario");
+  const refresh = document.querySelector(".refresh");
+  const timerDisplay = document.getElementById('timerDisplay');
+  const pipe = document.querySelector(".pipe");
+  const language = document.querySelector(".language");
+  const audio = document.querySelector(".audio");
+  const bulle = document.querySelector(".bulle");
+  const pause = document.querySelector(".pause");
+  const start_button = document.querySelector(".start-button")
+  const gameBoard = document.querySelector('.game-board');
+  const clouds = document.querySelector('.clouds');
+  const border = document.querySelector('.border');
+  
+  audio_jump.load();
+  audio_game_over.load();
+
+  const loop = setInterval(() => {
+    if (gameRunning){
+      myscore = myscore + 1;
+      scoreDisplay.innerHTML = `Score : ${myscore} m`;
+      const pipePosition = pipe.offsetLeft;
+      const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
+      if (pipePosition > 0 && pipePosition < 120 && marioPosition < pipe.offsetHeight + border.offsetHeight) {
+        audio_game_over.currentTime = 0;
+        audio_game_over.play();
+        pipe.style.animation = "none";
+        pipe.style.left = `${pipePosition}px`;
+        mario.style.animation = "none";
+        mario.style.bottom = `5vh`;
+        mario.src = images.mario;
+        mario.style.width = "10vh";
+        bulle.style.display = "block";
+        background.classList.add('gameover');
+
+        clearInterval(loop);
+      }
+    }
+  }, 10)
+
+
+
+  // Game functions
+  function jump() {
+    if (gameRunning){
+      mario.classList.add('jump');
+      audio_jump.currentTime = 0;
+      audio_jump.play();
+      setTimeout(() => {
+        mario.classList.remove('jump');
+      }, 600)
+    }
+  }
+  function toggleImage() {
+    cvOpened = !cvOpened;
+    document.querySelector('.bulle').src = cvOpened ? images.cv.closeButton : images.cv.openButton;
+  };
+  function toggleMusic() {
+    if (audio.paused) {
+      audio.play();
+      music.classList.remove('fa-volume-xmark');
+      music.classList.add('fa-volume-low');
+    } else {
+      audio.pause();
+      music.classList.remove('fa-volume-low');
+      music.classList.add('fa-volume-xmark');
+    }
+  }
+  function togglePlay() {
+    if (pause.classList.contains("fa-play")) {
+      start_button.style.display = "none"
+      gameRunning = true;
+      pause.classList.remove('fa-play');
+      pause.classList.add('fa-pause');
+      clouds.style.animationPlayState = 'running';
+      pipe.style.animationPlayState = 'running';
+      background.classList.remove('gameover');
+      
+    } else {
+      gameRunning = false;
+      pause.classList.remove('fa-pause');
+      pause.classList.add('fa-play');
+      clouds.style.animationPlayState = 'paused';
+      pipe.style.animationPlayState = 'paused';
+      
+    }
+  }
+
+  // Listeners
+  document.addEventListener("keydown", jump);
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageSources = images.cloud;
+
+    const clouds = document.querySelector(".clouds");
+    let currentImageIndex = 0;
+    function changeImage() {
+      clouds.src = imageSources[currentImageIndex];
+      currentImageIndex = (currentImageIndex + 1) % imageSources.length;
+    }
+
+    setInterval(() => {
+      const cloudsPosition = clouds.offsetLeft;
+      if (cloudsPosition + clouds.clientWidth < 0 ) {
+        changeImage();
+      }
+    }, 200)
+  });
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const imageObstacles = images.obstacles;
+    const pipe = document.querySelector(".pipe");
+    let currentImageIndex = 0;
+    function changeObstacle() {
+      pipe.src = imageObstacles[currentImageIndex];
+      currentImageIndex = (currentImageIndex + 1) % imageObstacles.length;
+    }
+    setInterval(() => {
+      const pipePosition = pipe.offsetLeft;
+      if (pipePosition + pipe.clientWidth < 0 ) {
+        changeObstacle();
+      }
+    }, 200)
+  });
+
+  // Onclicks
+
+  bulle.onclick = function () {
+    modal.style.visibility = (modal.style.visibility == "visible") ? "hidden" : "visible";
+    toggleImage()
+  };
+  music.onclick = function () {
+    toggleMusic()
+  };
+  pause.onclick = function () {
+    togglePlay()
+  };
+  start_button.onclick = function () {
+    togglePlay()
+    start_button.style.display = "none"
+  }
+  refresh.onclick = function () {
+    window.location.reload();
+  };
+</script>
