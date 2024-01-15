@@ -11,13 +11,13 @@
 <body>
   <div class="game-board">
     <audio controls preload="metadata" loop class="audio" hidden="true">
-      <source src="src/assets/Eric Skiff - Underclocked ♫ NO COPYRIGHT 8-bit Music + Background (1).mp3">
+      <source src="src/assets/sound-game.mp3">
     </audio>
 
     <img src="src/assets/cloud-1.png" class="clouds">
-    <img src="src/assets/icegif-1258.gif" class="mario">
-    <img src="src/assets/Clic_ici_pour_voir_mon_CV-removebg-preview.png" class="bulle">
-    <img src="src/assets/images-removebg-preview.png" class="pipe">
+    <img src="src/assets/personnage.gif" class="personnage">
+    <img src="src/assets/bulle-1.png" class="bulle">
+    <img src="src/assets/barrier-3.png" class="barrier">
     <div class="menu">
       <i class="fa-solid fa-volume-xmark fa-5x music"></i>
       <i class="fa-solid fa-play fa-5x pause"></i>
@@ -28,7 +28,7 @@
     </div>
     <button class="start-button">START</button>
     <div class="background gameover">
-        <img src="src/assets/photo-1619410283995-43d9134e7656.avif" />
+        <img src="src/assets/background.avif" />
       </div>
   </div>
 
@@ -39,10 +39,10 @@
   </div>
 
   <audio controls preload="metadata" class="audio-jump" hidden="true">
-    <source src="src/assets/Jump sound effect - No copyright.mp3 ">
+    <source src="src/assets/jump-sound.mp3 ">
   </audio>
   <audio controls preload="metadata" class="audio-game-over" hidden="true">
-    <source src="src/assets/Arcade game over sound effect!.mp3">
+    <source src="src/assets/game-over-sound.mp3">
   </audio>
 
   <div class="border">
@@ -104,17 +104,17 @@
   .audio{
     position:fixed
   }
-  .pipe{
+  .barrier{
     position: absolute;
     bottom: 5vh;
     width: 12vh;
     height: 10vh;
-    animation: pipe-animation 2s infinite linear;
+    animation: barrier-animation 2s infinite linear;
     animation-play-state: paused;
     object-fit: cover;
     overflow: visible
   }
-  .mario{
+  .personnage{
     width: 12vh;
     position: absolute;
     bottom: 5vh;
@@ -140,7 +140,7 @@
   }
   .border{
     position: absolute;
-    background-image: url("src/assets/testo.jpeg");
+    background-image: url("src/assets/background-bottom.jpeg");
     background-size: contain;
     bottom: 0;
     height: 5vh;
@@ -239,7 +239,7 @@
     justify-content: space-around;
     color: white;
   }
-  @keyframes pipe-animation{
+  @keyframes barrier-animation{
     from {
       right: -200px;
     }
@@ -296,12 +296,13 @@
 </style>
 
 <script>
+  console.log("Oh...Un dev ! Ca faisait bien longtemps ! Bienvenue dans mon CV !")
   let myscore = 0;
   let gameRunning = false;
   let cvOpened = false;
 
   const images = {
-    mario: "src/assets/1665458081_9040_gif-url.gif",
+    personnage: "src/assets/game-over.gif",
     cloud: [
     'src/assets/cloud-2.png',
     'src/assets/cloud-3.png',
@@ -309,17 +310,17 @@
     'src/assets/cloud-5.png'
     ],
     obstacles: [
-    'src/assets/kisspng-html-css-design-and-build-web-sites-web-develop-5af50c33d59ff9.681459051526008883875-removebg-preview.png',
-    'src/assets/téléchargement-removebg-preview.png',
-    'src/assets/Vue-removebg-preview.png',
-    'src/assets/pngwing.com (1).png',
+    'src/assets/barrier-2.png',
+    'src/assets/barrier-4.png',
+    'src/assets/barrier-1.png',
+    'src/assets/barrier-6.png',
     'src/assets/pngegg.png',
-    'src/assets/62c48bbdd884e8c372162223.png',
-    'src/assets/62debc4fff3c6e4b8b5de8d3.png',
+    'src/assets/barrier-5.png',
+    'src/assets/barrier-7.png',
     ],
     cv: {
-      openButton: 'src/assets/Clic_ici_pour_voir_mon_CV-removebg-preview.png',
-      closeButton: 'src/assets/cv2.png',
+      openButton: 'src/assets/bulle-1.png',
+      closeButton: 'src/assets/bulle-2.png',
     },
   }
   
@@ -330,10 +331,10 @@
   const music = document.querySelector('.music');
   const audio_jump = document.querySelector('.audio-jump');
   const audio_game_over = document.querySelector('.audio-game-over');
-  const mario = document.querySelector(".mario");
+  const personnage = document.querySelector(".personnage");
   const refresh = document.querySelector(".refresh");
   const timerDisplay = document.getElementById('timerDisplay');
-  const pipe = document.querySelector(".pipe");
+  const barrier = document.querySelector(".barrier");
   const language = document.querySelector(".language");
   const audio = document.querySelector(".audio");
   const bulle = document.querySelector(".bulle");
@@ -350,17 +351,17 @@
     if (gameRunning){
       myscore = myscore + 1;
       scoreDisplay.innerHTML = `Score : ${myscore} m`;
-      const pipePosition = pipe.offsetLeft;
-      const marioPosition = +window.getComputedStyle(mario).bottom.replace("px", "");
-      if (pipePosition > 0 && pipePosition < 120 && marioPosition < pipe.offsetHeight + border.offsetHeight) {
+      const barrierPosition = barrier.offsetLeft;
+      const personnagePosition = +window.getComputedStyle(personnage).bottom.replace("px", "");
+      if (barrierPosition > 0 && barrierPosition < 120 && personnagePosition < barrier.offsetHeight + border.offsetHeight) {
         audio_game_over.currentTime = 0;
         audio_game_over.play();
-        pipe.style.animation = "none";
-        pipe.style.left = `${pipePosition}px`;
-        mario.style.animation = "none";
-        mario.style.bottom = `5vh`;
-        mario.src = images.mario;
-        mario.style.width = "10vh";
+        barrier.style.animation = "none";
+        barrier.style.left = `${barrierPosition}px`;
+        personnage.style.animation = "none";
+        personnage.style.bottom = `5vh`;
+        personnage.src = images.personnage;
+        personnage.style.width = "10vh";
         bulle.style.display = "block";
         background.classList.add('gameover');
 
@@ -374,11 +375,11 @@
   // Game functions
   function jump() {
     if (gameRunning){
-      mario.classList.add('jump');
+      personnage.classList.add('jump');
       audio_jump.currentTime = 0;
       audio_jump.play();
       setTimeout(() => {
-        mario.classList.remove('jump');
+        personnage.classList.remove('jump');
       }, 600)
     }
   }
@@ -404,7 +405,7 @@
       pause.classList.remove('fa-play');
       pause.classList.add('fa-pause');
       clouds.style.animationPlayState = 'running';
-      pipe.style.animationPlayState = 'running';
+      barrier.style.animationPlayState = 'running';
       background.classList.remove('gameover');
       
     } else {
@@ -412,7 +413,7 @@
       pause.classList.remove('fa-pause');
       pause.classList.add('fa-play');
       clouds.style.animationPlayState = 'paused';
-      pipe.style.animationPlayState = 'paused';
+      barrier.style.animationPlayState = 'paused';
       
     }
   }
@@ -440,15 +441,15 @@
   
   document.addEventListener('DOMContentLoaded', function() {
     const imageObstacles = images.obstacles;
-    const pipe = document.querySelector(".pipe");
+    const barrier = document.querySelector(".barrier");
     let currentImageIndex = 0;
     function changeObstacle() {
-      pipe.src = imageObstacles[currentImageIndex];
+      barrier.src = imageObstacles[currentImageIndex];
       currentImageIndex = (currentImageIndex + 1) % imageObstacles.length;
     }
     setInterval(() => {
-      const pipePosition = pipe.offsetLeft;
-      if (pipePosition + pipe.clientWidth < 0 ) {
+      const barrierPosition = barrier.offsetLeft;
+      if (barrierPosition + barrier.clientWidth < 0 ) {
         changeObstacle();
       }
     }, 200)
