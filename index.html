@@ -34,7 +34,7 @@
 
   <div id="modal">
     <div>
-      <img src="src/assets/CV.jpg" width="600vw" height="700vw" id="cv">
+      <img src="src/assets/CV.jpg" id="cv">
     </div>
   </div>
 
@@ -239,6 +239,10 @@
     justify-content: space-around;
     color: white;
   }
+  #cv{
+    height: 30vh;
+    width: 30vw;
+  }
   @keyframes barrier-animation{
     from {
       right: -200px;
@@ -291,7 +295,48 @@
       right:100%
     }
   }
-  
+
+@media only screen and (max-width: 600px) {
+
+  .game-board {
+    padding-bottom: 5vh; /* Ajout de la marge inférieure pour éviter le chevauchement avec la .border */
+  }
+
+  .border {
+    position: fixed; /* Modifier la position pour être fixe en bas de l'écran */
+  }
+  .personnage{
+    margin-bottom: 14vh;
+    width: 9vh;
+  }
+  .barrier{
+    margin-bottom: 14vh;
+    width: 9vh;
+    height: 8vh;
+  }
+  .start-button{
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 6vh;
+  }
+  .menu{
+    margin-top:5vh;
+  }
+  .clouds{
+    width: 35vh;
+    margin-top: 20vh;
+  }
+  #scoreDisplay{
+    font-size: 2vh;
+  }
+  .bulle{
+    margin-bottom:14vh;
+  }
+  #modal img{
+    max-width: none;
+    height: 60vh;
+    width: 70vw;
+  }
+}
   
 </style>
 
@@ -353,7 +398,8 @@
       scoreDisplay.innerHTML = `Score : ${myscore} m`;
       const barrierPosition = barrier.offsetLeft;
       const personnagePosition = +window.getComputedStyle(personnage).bottom.replace("px", "");
-      if (barrierPosition > 0 && barrierPosition < 120 && personnagePosition < barrier.offsetHeight + border.offsetHeight) {
+      //changement de barrierposition < 120 à 60
+      if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight) {
         audio_game_over.currentTime = 0;
         audio_game_over.play();
         barrier.style.animation = "none";
@@ -474,4 +520,23 @@
   refresh.onclick = function () {
     window.location.reload();
   };
+
+
+  document.querySelector('.game-board').addEventListener('click', function(event) {
+  if (event.target.closest('.start-button')) {
+    // Code à exécuter lorsque le clic se produit en dehors du background
+    console.log("Clic en dehors du background !");
+  }
+  // Ajoutez ici le code à exécuter lorsque le clic se produit sur le background
+});
+
+document.body.addEventListener('click', function(event) {
+  // Vérifier si l'élément cliqué est le background ou l'un de ses descendants
+  if (!event.target.closest('.start-button')) {
+    // Code à exécuter lorsque le clic se produit en dehors du background
+    console.log("Clic en dehors du background !");
+    jump();
+  }
+});
+
 </script>
