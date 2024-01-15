@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="icon" href="src/assets/icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-..." crossorigin="anonymous">
   
@@ -345,6 +345,7 @@
   let myscore = 0;
   let gameRunning = false;
   let cvOpened = false;
+  let music_mute = true
 
   const images = {
     personnage: "src/assets/game-over.gif",
@@ -400,8 +401,10 @@
       const personnagePosition = +window.getComputedStyle(personnage).bottom.replace("px", "");
       //changement de barrierposition < 120 à 60
       if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight) {
+        if (!music_mute){
         audio_game_over.currentTime = 0;
         audio_game_over.play();
+        }
         barrier.style.animation = "none";
         barrier.style.left = `${barrierPosition}px`;
         personnage.style.animation = "none";
@@ -410,7 +413,6 @@
         personnage.style.width = "10vh";
         bulle.style.display = "block";
         background.classList.add('gameover');
-
         clearInterval(loop);
       }
     }
@@ -422,8 +424,10 @@
   function jump() {
     if (gameRunning){
       personnage.classList.add('jump');
-      audio_jump.currentTime = 0;
-      audio_jump.play();
+      if (!music_mute){
+        audio_jump.currentTime = 0;
+        audio_jump.play();
+      }
       setTimeout(() => {
         personnage.classList.remove('jump');
       }, 600)
@@ -438,10 +442,12 @@
       audio.play();
       music.classList.remove('fa-volume-xmark');
       music.classList.add('fa-volume-low');
+      music_mute = false
     } else {
       audio.pause();
       music.classList.remove('fa-volume-low');
       music.classList.add('fa-volume-xmark');
+      music_mute = true
     }
   }
   function togglePlay() {
@@ -521,20 +527,8 @@
     window.location.reload();
   };
 
-
-  document.querySelector('.game-board').addEventListener('click', function(event) {
-  if (event.target.closest('.start-button')) {
-    // Code à exécuter lorsque le clic se produit en dehors du background
-    console.log("Clic en dehors du background !");
-  }
-  // Ajoutez ici le code à exécuter lorsque le clic se produit sur le background
-});
-
-document.body.addEventListener('click', function(event) {
-  // Vérifier si l'élément cliqué est le background ou l'un de ses descendants
+document.body.addEventListener('touchstart', function(event) {
   if (!event.target.closest('.start-button')) {
-    // Code à exécuter lorsque le clic se produit en dehors du background
-    console.log("Clic en dehors du background !");
     jump();
   }
 });
