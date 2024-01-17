@@ -296,22 +296,13 @@
     }
   }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 640px) and (max-height: 800px){
 
-  .game-board {
-    padding-bottom: 5vh;
-  }
-
-  .border {
-    position: fixed;
-  }
   .personnage{
-    width: 5vh;
-    bottom: 10vw;
+    bottom: 19.5vh;
   }
   .barrier{
-    width: 9vh;
-    height: 8vh;
+    bottom: 19.5vh;
   }
   .start-button{
     font-family: 'Press Start 2P', sans-serif;
@@ -335,8 +326,21 @@
     height: 60vh;
     width: 70vw;
   }
-}
-@keyframes clouds-animation{
+  @keyframes jump {
+    0% {
+      bottom: 20vh;
+    }
+    25% {
+      bottom: 40vh;
+    }
+    40% {
+      bottom: 40vh;
+    }
+    100% {
+      bottom: 20vh;
+    }
+  }
+  @keyframes clouds-animation{
     0%{
       left: calc(100vw + 17.5vh)
     }
@@ -349,8 +353,10 @@
     100%{
       left: calc(0% - 50vh - 10vw);
     }
+    
   }
-  
+}
+
 </style>
 
 <script>
@@ -382,6 +388,7 @@
       closeButton: 'src/assets/bulle-2.png',
     },
   }
+
   
   // Elements
   const background = document.querySelector(".background");
@@ -415,17 +422,25 @@
       const barrierPosition = barrier.offsetLeft;
       const personnagePosition = +window.getComputedStyle(personnage).bottom.replace("px", "");
       //changement de barrierposition < 120 à 60
-      if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight) {
+      let collisionThreshold = 5; // Valeur par défaut
+
+      // Média query pour ajuster la collision pour les petits écrans
+      if (window.matchMedia("(max-width: 640px)").matches) {
+        collisionThreshold = 100;
+      }
+      if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight + collisionThreshold) {
         if (!music_mute){
         audio_game_over.currentTime = 0;
         audio_game_over.play();
         }
         barrier.style.left = `${barrierPosition}px`;
-        personnage.style.bottom = `5vh`;
+        if (window.matchMedia("(max-width: 640px)").matches) {
+          personnage.style.bottom = `20vh`;
+        }
         personnage.src = images.personnage;
-        personnage.style.width = "10vh";
         bulle.style.display = "block";
         background.classList.add('gameover');
+        personnage.style.width = "10vh";
         gameRunning = false
         clearInterval(loop);
       }
@@ -573,6 +588,7 @@
     resetGame();
   };
 
+// Terminer reload
 // Fix bug lien border
 // fixer bug quand on clic sur menu ca jump
 // Ajouter animations 
