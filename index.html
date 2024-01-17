@@ -244,10 +244,10 @@
     width: 30vw;
   }
   @keyframes barrier-animation{
-    from {
+    0% {
       right: -200px;
     }
-    to {
+    100% {
       right: calc(100% + 24vh)
     }
   }
@@ -299,14 +299,15 @@
 @media only screen and (max-width: 600px) {
 
   .game-board {
-    padding-bottom: 5vh; /* Ajout de la marge inférieure pour éviter le chevauchement avec la .border */
+    padding-bottom: 5vh;
   }
 
   .border {
-    position: fixed; /* Modifier la position pour être fixe en bas de l'écran */
+    position: fixed;
   }
   .personnage{
-    width: 9vh;
+    width: 5vh;
+    bottom: 10vw;
   }
   .barrier{
     width: 9vh;
@@ -405,7 +406,9 @@
   audio_jump.load();
   audio_game_over.load();
 
+  function game_loop(){
   const loop = setInterval(() => {
+    console.log(gameRunning)
     if (gameRunning){
       myscore = myscore + 1;
       scoreDisplay.innerHTML = `Score : ${myscore} m`;
@@ -417,18 +420,18 @@
         audio_game_over.currentTime = 0;
         audio_game_over.play();
         }
-        barrier.style.animation = "none";
         barrier.style.left = `${barrierPosition}px`;
-        personnage.style.animation = "none";
         personnage.style.bottom = `5vh`;
         personnage.src = images.personnage;
         personnage.style.width = "10vh";
         bulle.style.display = "block";
         background.classList.add('gameover');
+        gameRunning = false
         clearInterval(loop);
       }
     }
   }, 10)
+}
 
 
 
@@ -441,6 +444,7 @@
         audio_jump.play();
       }
       setTimeout(() => {
+        console.log("jump remove")
         personnage.classList.remove('jump');
       }, 600)
     }
@@ -464,14 +468,14 @@
   }
   function togglePlay() {
     if (pause.classList.contains("fa-play")) {
+      game_loop()
       start_button.style.display = "none"
       gameRunning = true;
       pause.classList.remove('fa-play');
       pause.classList.add('fa-pause');
       clouds.style.animationPlayState = 'running';
       barrier.style.animationPlayState = 'running';
-      background.classList.remove('gameover');
-      
+      background.classList.remove('gameover');      
     } else {
       gameRunning = false;
       pause.classList.remove('fa-pause');
@@ -481,7 +485,32 @@
       
     }
   }
-
+  function resetGame() {
+  myscore = 0;
+  gameRunning = false;
+  cvOpened = false;
+  scoreDisplay.innerHTML = 'Score : 0 m';
+  personnage.classList.remove('jump');
+  personnage.src = 'src/assets/personnage.gif';
+  personnage.style.width = '12vh';
+  bulle.style.display = 'none';
+  const initialBarrierPosition = window.innerWidth - 200; 
+  barrier.style.right = `${initialBarrierPosition}px`;
+  barrier.style.left = '';
+  clouds.style.animationPlayState = 'paused';
+  barrier.style.animationPlayState = 'paused';
+  start_button.style.display = "block";
+  pause.classList.remove('fa-pause');
+  pause.classList.add('fa-play');
+  barrier.style.animation = 'none';
+  barrier.offsetHeight;
+  barrier.style.animation = null;
+  clouds.style.animation = 'none';
+  clouds.offsetHeight;
+  clouds.style.animation = null;
+  barrier.src = "src/assets/barrier-3.png";
+  clouds.src = "src/assets/cloud-1.png"
+}
   // Listeners
   document.addEventListener("keydown", jump);
   
@@ -518,7 +547,11 @@
       }
     }, 200)
   });
-
+  document.body.addEventListener('touchstart', function(event) {
+    if (!event.target.closest('.start-button')) {
+      jump();
+    }
+  });
   // Onclicks
 
   bulle.onclick = function () {
@@ -534,15 +567,13 @@
   start_button.onclick = function () {
     togglePlay()
     start_button.style.display = "none"
+    
   }
   refresh.onclick = function () {
-    window.location.reload();
+    resetGame();
   };
 
-document.body.addEventListener('touchstart', function(event) {
-  if (!event.target.closest('.start-button')) {
-    jump();
-  }
-});
-
+// Fix bug lien border
+// fixer bug quand on clic sur menu ca jump
+// Ajouter animations 
 </script>
