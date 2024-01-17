@@ -369,20 +369,6 @@
   .bulle{
     margin-bottom:5vh;
   }
-  @keyframes jump {
-    0% {
-      bottom: 5vh;
-    }
-    25% {
-      bottom: 27vh;
-    }
-    40% {
-      bottom: 27vh;
-    }
-    100% {
-      bottom: 5vh;
-    }
-  }
 }
 
 </style>
@@ -453,7 +439,7 @@
       let collisionThreshold = 5; // Valeur par défaut
 
       // Média query pour ajuster la collision pour les petits écrans
-      if (window.matchMedia("(max-width: 380px)").matches) {
+      if (window.matchMedia("(max-width: 640px)").matches) {
         collisionThreshold = 100;
       }
       if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight + collisionThreshold) {
@@ -462,7 +448,7 @@
         audio_game_over.play();
         }
         barrier.style.left = `${barrierPosition}px`;
-        if (window.matchMedia("(max-width: 380px)").matches) {
+        if (window.matchMedia("(max-width: 640px)").matches) {
           personnage.style.bottom = `20vh`;
         }
         personnage.src = images.personnage;
