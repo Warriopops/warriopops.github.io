@@ -582,14 +582,16 @@
     }
   });
   document.addEventListener("DOMContentLoaded", function() {
-  const personnage = document.querySelector(".personnage");
+    const urlParams = new URLSearchParams(window.location.search);
+    const backgroundParam = urlParams.get('background');
+    const backgroundDiv = document.getElementById("background");
 
-  if (document.referrer.includes("linkedin") || document.referrer.includes("messenger") || document.referrer.includes("snapchat")) {
-    personnage.style.bottom = "5vh";
-  } else {
-    personnage.style.bottom = "20vh";
-  }
-});
+    if (backgroundParam === 'image1') {
+      backgroundDiv.style.backgroundImage = "src/assets/barrier-4.png')";
+    } else if (backgroundParam === 'image2') {
+      backgroundDiv.style.backgroundImage = "src/assets/barrier-4.png')";
+    }
+  });
   // Onclicks
 
   bulle.onclick = function () {
