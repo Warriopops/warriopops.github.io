@@ -297,6 +297,13 @@
   }
 
 @media only screen and (max-width: 500px){
+
+  .personnage{
+    bottom: 19.5vh;
+  }
+  .barrier{
+    bottom: 19.5vh;
+  }
   .start-button{
     font-family: 'Press Start 2P', sans-serif;
     font-size: 6vh;
@@ -319,6 +326,20 @@
     height: 60vh;
     width: 70vw;
   }
+  @keyframes jump {
+    0% {
+      bottom: 20vh;
+    }
+    25% {
+      bottom: 40vh;
+    }
+    40% {
+      bottom: 40vh;
+    }
+    100% {
+      bottom: 20vh;
+    }
+  }
   @keyframes clouds-animation{
     0%{
       left: calc(100vw + 17.5vh)
@@ -333,6 +354,20 @@
       left: calc(0% - 50vh - 10vw);
     }
     
+  }
+}
+@media only screen and (max-width: 374px) {
+  .personnage{
+    bottom: 5vh;
+  }
+  .barrier{
+    bottom: 5vh;
+  }
+  .clouds{
+    margin-top: 30vh;
+  }
+  .bulle{
+    margin-bottom:5vh;
   }
 }
 
@@ -546,6 +581,15 @@
       jump();
     }
   });
+  document.addEventListener("DOMContentLoaded", function() {
+  const personnage = document.querySelector(".personnage");
+
+  if (document.referrer.includes("linkedin") || document.referrer.includes("messenger") || document.referrer.includes("snapchat")) {
+    personnage.style.bottom = "5vh";
+  } else {
+    personnage.style.bottom = "20vh";
+  }
+});
   // Onclicks
 
   bulle.onclick = function () {
