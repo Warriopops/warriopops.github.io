@@ -13,9 +13,9 @@
     <audio controls preload="metadata" loop class="audio" hidden="true">
       <source src="src/assets/sound-game.mp3">
     </audio>
-
+    <img src="src/assets/bird.gif" class="avion">
     <img src="src/assets/cloud-1.png" class="clouds">
-    <img src="src/assets/personnage.gif" class="personnage">
+    <img src="src/assets/personnage.gif" class="personnage" >
     <img src="src/assets/bulle-1.png" class="bulle">
     <img src="src/assets/barrier-3.png" class="barrier">
     <div class="menu">
@@ -105,22 +105,24 @@
     position:fixed
   }
   .barrier{
-    position: absolute;
+    position: fixed;
     bottom: 5vh;
     width: 12vh;
     height: 10vh;
     animation: barrier-animation 2s infinite linear;
     animation-play-state: paused;
-    object-fit: cover;
-    overflow: visible
+
   }
   .personnage{
     width: 12vh;
-    position: absolute;
     bottom: 5vh;
+    position: fixed;
+  }
+  .bird{
+    transform: scaleX(-1);
   }
   .bulle{
-    position: absolute;
+    position: fixed;
     bottom: 10vh;
     margin-left: 7vh;
     width: 15vh;
@@ -128,14 +130,21 @@
     display: none;
   }
   .jump{
-    animation: jump 600ms;
-    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    animation: jump 600ms !important;
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1) !important;
   }
   .clouds{
     position: absolute;
     width: 50vh;
     margin-top: 20vh;
     animation: clouds-animation 10s infinite ease-in-out;
+    animation-play-state: paused;
+  }
+  .avion{
+    position: absolute;
+    width: 15vh;
+    margin-top: 22vh;
+    animation: avion-animation 15s infinite ease-in-out;
     animation-play-state: paused;
   }
   .border{
@@ -279,6 +288,14 @@
       left: calc(0% - 50vh - 10vw);
     }
   }
+  @keyframes avion-animation{
+    0%{
+      left: calc(100vw + 25vh)
+    }
+    100%{
+      left: calc(0% - 50vh - 10vw);
+    }
+  }
   @keyframes test-animation{
     from{
       right: 0;
@@ -299,11 +316,8 @@
 @media only screen and (max-width: 500px){
 
   .personnage{
-    bottom: 19.5vh;
   }
-  .barrier{
-    bottom: 19.5vh;
-  }
+
   .start-button{
     font-family: 'Press Start 2P', sans-serif;
     font-size: 6vh;
@@ -318,28 +332,13 @@
   #scoreDisplay{
     font-size: 2vh;
   }
-  .bulle{
-    margin-bottom:14vh;
-  }
+
   #modal img{
     max-width: none;
     height: 60vh;
     width: 70vw;
   }
-  @keyframes jump {
-    0% {
-      bottom: 20vh;
-    }
-    25% {
-      bottom: 40vh;
-    }
-    40% {
-      bottom: 40vh;
-    }
-    100% {
-      bottom: 20vh;
-    }
-  }
+
   @keyframes clouds-animation{
     0%{
       left: calc(100vw + 17.5vh)
@@ -355,19 +354,14 @@
     }
     
   }
-}
-@media only screen and (max-width: 374px) {
-  .personnage{
-    bottom: 5vh;
-  }
-  .barrier{
-    bottom: 5vh;
-  }
-  .clouds{
-    margin-top: 30vh;
-  }
-  .bulle{
-    margin-bottom:5vh;
+  @keyframes avion-animation{
+    0%{
+      left: calc(100vw + 17.5vh)
+    }
+    100%{
+      left: calc(0% - 50vh - 10vw);
+    }
+    
   }
 }
 
@@ -387,6 +381,9 @@
     'src/assets/cloud-3.png',
     'src/assets/cloud-4.png',
     'src/assets/cloud-5.png'
+    ],
+    avion: [
+    'src/assets/bird.gif'
     ],
     obstacles: [
     'src/assets/barrier-2.png',
@@ -422,6 +419,7 @@
   const start_button = document.querySelector(".start-button")
   const gameBoard = document.querySelector('.game-board');
   const clouds = document.querySelector('.clouds');
+  const avion = document.querySelector('.avion');
   const border = document.querySelector('.border');
   
   audio_jump.load();
@@ -435,22 +433,13 @@
       scoreDisplay.innerHTML = `Score : ${myscore} m`;
       const barrierPosition = barrier.offsetLeft;
       const personnagePosition = +window.getComputedStyle(personnage).bottom.replace("px", "");
-      //changement de barrierposition < 120 à 60
-      let collisionThreshold = 5; // Valeur par défaut
-
-      // Média query pour ajuster la collision pour les petits écrans
-      if (window.matchMedia("(max-width: 640px)").matches) {
-        collisionThreshold = 100;
-      }
-      if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight + collisionThreshold) {
+      if (barrierPosition > 0 && barrierPosition < 60 && personnagePosition < barrier.offsetHeight + border.offsetHeight) {
         if (!music_mute){
         audio_game_over.currentTime = 0;
         audio_game_over.play();
         }
         barrier.style.left = `${barrierPosition}px`;
-        if (window.matchMedia("(max-width: 640px)").matches) {
-          personnage.style.bottom = `20vh`;
-        }
+
         personnage.src = images.personnage;
         bulle.style.display = "block";
         background.classList.add('gameover');
@@ -503,6 +492,7 @@
       pause.classList.remove('fa-play');
       pause.classList.add('fa-pause');
       clouds.style.animationPlayState = 'running';
+      avion.style.animationPlayState = 'running';
       barrier.style.animationPlayState = 'running';
       background.classList.remove('gameover');      
     } else {
@@ -510,6 +500,7 @@
       pause.classList.remove('fa-pause');
       pause.classList.add('fa-play');
       clouds.style.animationPlayState = 'paused';
+      avion.style.animationPlayState = 'paused';
       barrier.style.animationPlayState = 'paused';
       
     }
@@ -527,6 +518,7 @@
   barrier.style.right = `${initialBarrierPosition}px`;
   barrier.style.left = '';
   clouds.style.animationPlayState = 'paused';
+  avion.style.animationPlayState = 'paused';
   barrier.style.animationPlayState = 'paused';
   start_button.style.display = "block";
   pause.classList.remove('fa-pause');
@@ -556,6 +548,29 @@
     setInterval(() => {
       const cloudsPosition = clouds.offsetLeft;
       if (cloudsPosition + clouds.clientWidth < 0 ) {
+        changeImage();
+      }
+    }, 200)
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const avionImage = images.avion;
+
+    const avion = document.querySelector(".avion");
+    let currentImageIndex = 0;
+    function changeImage() {
+      avion.src = avionImage[currentImageIndex];
+      currentImageIndex = (currentImageIndex + 1) % avionImage.length;
+    }
+    if (currentImageIndex === 0) {
+      avion.classList.add('bird');
+    } else {
+      avion.classList.remove('bird');
+    }
+
+    setInterval(() => {
+      const avionPosition = avion.offsetLeft;
+      if (avionPosition + avion.clientWidth < 0 ) {
         changeImage();
       }
     }, 200)
@@ -613,8 +628,6 @@
     resetGame();
   };
 
-// Terminer reload
-// Fix bug lien border
-// fixer bug quand on clic sur menu ca jump
+// fixer bug quand on clic sur menu ca jump téléphone
 // Ajouter animations 
 </script>
