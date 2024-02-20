@@ -62,7 +62,7 @@ export const Contact = () => {
                     <Col md={6}>
                         <div className="wrapper text-center">
                         <form onSubmit={handleSubmit}>
-                            <h2>Send me an email !</h2>
+                            <h2>Contact me !</h2>
                             <Row>
                                 <Col sm={6} className="px-1 input-box">
                                     <i class='bx bx-user'></i>

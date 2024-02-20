@@ -1,10 +1,6 @@
 import {Container, Col, Row} from "react-bootstrap";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import meter1 from '../assets/img/meter1.svg';
-import meter2 from '../assets/img/meter2.svg';
-import meter3 from '../assets/img/meter3.svg';
-
 
 export const Skills = () => {
     const responsive = {
@@ -34,11 +30,10 @@ export const Skills = () => {
                             <h2>
                                 Skills
                             </h2>
-                            <p>My skills</p>
+                            <p>The skills I acquired during my reconversion</p>
                             <Carousel responsive={responsive} infinite={true} className="skill-slider">
                                 <div className="item">
-                                    <h5>Front Development</h5>
-                                    <img src={meter1} alt="Image"></img>
+                                    <h5 className="tagline">Front Development</h5>
                                     <h5>HTML & CSS</h5>
                                     <h5>Javascript</h5>
                                     <h5>React</h5>
@@ -47,30 +42,26 @@ export const Skills = () => {
                                     <h5>Boostrap & Library</h5>
                                 </div>
                                 <div className="item">
-                                    <h5>Back Development</h5>
-                                    <img src={meter2} alt="Image"></img>
+                                    <h5 className="tagline">Back Development</h5>
                                     <h5>Ruby on Rails</h5>
                                     <h5>Node.js</h5>
                                     <h5>MVC</h5>
                                 </div>
                                 <div className="item">
-                                    <h5>Database</h5>
-                                    <img src={meter3} alt="Image"></img>
+                                    <h5 className="tagline">Database</h5>
                                     <h5>SQL & Active Record</h5>
                                     <h5>PostgreSQL & SQLite</h5>
                                 </div>
                                 <div className="item">
-                                    <h5>Others</h5>
-                                    <img src={meter1} alt="Image"></img>
+                                    <h5 className="tagline">Others</h5>
                                     <h5>Github</h5>
                                     <h5>Figma</h5>
                                     <h5>Heroku</h5>
                                     <h5>Tampermonkey</h5>
                                     <h5>API</h5>
                                 </div>
-                                <div className="item">
-                                    <h5>Soft Skills</h5>
-                                    <img src={meter1} alt="Image"></img>
+                                <div className="item soft">
+                                    <h5 className="tagline">Soft Skills</h5>
                                     <h5>Self-taught</h5>
                                     <h5>Team work</h5>
                                     <h5>Like to learn</h5>
