@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
 import escapeHtml from 'escape-html';
+import React from 'react';
+
 
 
 export const Contact = () => {
