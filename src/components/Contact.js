@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
+import escapeHtml from 'escape-html';
+
 
 export const Contact = () => {
     const formInitialDetails = {
@@ -14,8 +16,9 @@ export const Contact = () => {
     const [buttonText, setButtonText] = useState("Send");
     const [status, setStatus] = useState({});
     const [verifed, setVerifed] = useState(false);
-    function onChange() {
+    function onChange(value) {
         setVerifed(true);
+        onFormUpdate("recaptchaResponse", value);
       }
 
     const onFormUpdate = (category, value) => {
@@ -25,10 +28,15 @@ export const Contact = () => {
         })
     }
 
+   
     const handleSubmit = async (e) => {
         setVerifed(false);
         e.preventDefault();
-
+        formDetails.firstName = escapeHtml(formDetails.firstName)
+        formDetails.lastName = escapeHtml(formDetails.lastName)
+        formDetails.email = escapeHtml(formDetails.email)
+        formDetails.phone = escapeHtml(formDetails.phone)
+        formDetails.message = escapeHtml(formDetails.message)
         setButtonText('Sending...');
         try {
             const response = await fetch("http://localhost:5000/contact", {

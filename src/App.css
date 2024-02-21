@@ -550,6 +550,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.contact p{
+  width: 400px;
+}
 .form-container{
   margin-top:5vh;
   margin-bottom: 5vh;
@@ -714,8 +717,7 @@ Au déploiment :
 
 
 /* 
-1 : npm install escape-html
-2 : Verifier captcha coter serveur et pas front
+3 : déployer
 */
 
 /* 
@@ -729,4 +731,6 @@ FINIS :
 6 : régler responsive
 7 : changer format de skills et/ou un peu de front
 8 : Intégrer les vrais projets
+9 : npm install escape-html
+10 : Verifier captcha coter serveur et pas front
 */
