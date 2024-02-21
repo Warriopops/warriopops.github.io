@@ -1,17 +1,15 @@
 const express = require("express");
-const router = express.Router();
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
-
 app.use(cors());
-app.use("/", router);
 
 const contactEmail = nodemailer.createTransport({
   service: 'gmail',
@@ -29,7 +27,7 @@ contactEmail.verify((error) => {
   }
 });
 
-router.post("/contact", async (req, res) => {
+app.post("/contact", async (req, res) => {
   const { firstName, lastName, email, message, phone, recaptchaResponse } = req.body;
   try {
     const { default: fetch } = await import('node-fetch');
@@ -66,6 +64,12 @@ router.post("/contact", async (req, res) => {
     console.error("Error verifying captcha:", error);
     res.status(500).json({ error: "Error verifying captcha" });
   }
+});
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
