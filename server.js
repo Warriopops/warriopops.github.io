@@ -7,9 +7,11 @@ const path = require('path');
 dotenv.config();
 
 const app = express();
+const router = express.Router();
 
 app.use(express.json());
 app.use(cors());
+app.use("/", router);
 
 const contactEmail = nodemailer.createTransport({
   service: 'gmail',
@@ -27,7 +29,7 @@ contactEmail.verify((error) => {
   }
 });
 
-app.post("/contact", async (req, res) => {
+router.post("/contact", async (req, res) => {
   const { firstName, lastName, email, message, phone, recaptchaResponse } = req.body;
   try {
     const { default: fetch } = await import('node-fetch');
