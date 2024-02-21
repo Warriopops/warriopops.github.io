@@ -144,7 +144,7 @@ nav.navbar .navbar-nav .nav-link.navbar-link{
   width: 42px;
   height: 42px;
   position: absolute;
-  background-color: #EEEEEE;
+  background-color: #fff;
   color: #393E46;
   border-radius: 50%;
   transform: scale(0);
@@ -285,15 +285,16 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   background-repeat: no-repeat;
 }
 
-.banner .tagline{
+.banner .tagline, .skill .tagline{
   font-weight: 700;
   letter-spacing: 0.8px;
-  padding: 8px 10px;
-  background: linear-gradient(90deg, #393E46, #222831);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #043044, #00aab3);
+  border: 1px solid white;
   font-size: 20px;
   margin-bottom: 16px;
   display: inline-block;
+  color: white;
 }
 
 .banner h1{
@@ -352,6 +353,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   padding: 100px 50px 50px 50px;
   position: relative;
 }
+
 .skill-bx{
   background: #151515;
   border-radius: 64px;
@@ -442,7 +444,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   position: absolute;
   width: 0;
   height: 100%;
-  background: linear-gradient(90.21deg, #AA367C -5.91, #4A2FBD 111.58%);
+  background: linear-gradient(90.21deg, #043044 -5.91, #00aab3 111.58%);
   top: 0;
   left: 0;
   z-index: -1;
@@ -475,7 +477,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
 }
 .proj-imgbx::before{
   content: "";
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
+  background: linear-gradient(90.21deg, #043044 -5.91%, #00aab3 111.58%);
   opacity: 0.85;
   position: absolute;
   width: 100%;
@@ -494,6 +496,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   transition: 0.5 ease-in-out;
   opacity: 0;
   width: 100%;
+  color: white;
 }
 .proj-imgbx:hover .proj-txtx{
   top: 50%;
@@ -547,6 +550,9 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   padding-top: 30px;
   padding-bottom: 30px;
 }
+.contact p{
+  width: 400px;
+}
 .form-container{
   margin-top:5vh;
   margin-bottom: 5vh;
@@ -594,7 +600,7 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   color: #333;
   font-weight: 600;
   border: 2px solid #fff;
-  background-color: #b8b8b8;
+  background-color: #00aab3;
   margin-top: 20px;
 }
 .wrapper .btn:hover{
@@ -632,18 +638,86 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon{
   font-size: 24px;
   margin-bottom: 10px;
 }
+container{
+  width: 100%;
+}
+
+/* mobile */
 
 
+@media only screen and (max-width: 968px) {
+  .banner .tagline, .skill .tagline{
+    font-size: 17px;
+  }
+  .item h5{
+    font-size: 0.75rem;
+  }
+  .skill-bx .react-multiple-carousel_arrow{
+    margin-top:10px
+  }
+
+  .contact .wrapper{
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer p{
+    margin-top: 0px;
+    margin-right: 0px;
+  }
+  .footer .d-flex{
+    flex-direction: column;
+  }
+  .footer img{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20px;
+    height: 20px;
+  }
+  .banner h1{
+    font-size: 35px;
+  }
+  .navbar .social-icon{
+    margin: 20px;
+  }
+  .navbar-text button{
+    margin-left: 0px;
+  }
+  .navbar img{
+    width: 60px;
+    height: 60px;
+  }
+  .element.style{
+    width: 200px;
+  }
+  .skill-bx{
+    padding: 60px 0px;
+  }
+  .react-multiple-carousel__arrow{
+    margin: -9px;
+  }
+  .project-card-image, .proj-imgbx::before{
+    width: 80%;
+    border-radius: 20px 20px 20px 20px;
+  }
+  .proj-txtx span{
+    font-size: 11px;
+  }
+}
+
+/*
+Optionnel : 
+1 : Changer icone jeu
+*/
+
+/*
+Au déploiment : 
+1 : Intégrer jeu et changer background comme sur le portfolio
+*/
 
 
 /* 
-1 : Verifier si responsive
-2 : Intégrer les vrais projets
-3 : Click sur projet qui renvoie sur le projet
-4 : Intégrer jeu
-5 : changer format de skills
-6 : ajouter peut etre une meilleur description à skill, projects, ect
-7 : Bien faire les nom, supprimer photo qui ne servent pas
+3 : déployer
 */
 
 /* 
@@ -651,5 +725,12 @@ FINIS :
 
 1 : Créer un click contact
 2 : Click sur projects ne marche plus
-
+3 : ajouter peut etre une meilleur description à skill, projects, ect
+4 : Click sur projet qui renvoie sur le projet
+5 : Bien faire les nom, supprimer photo qui ne servent pas
+6 : régler responsive
+7 : changer format de skills et/ou un peu de front
+8 : Intégrer les vrais projets
+9 : npm install escape-html
+10 : Verifier captcha coter serveur et pas front
 */

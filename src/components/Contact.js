@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
+import escapeHtml from 'escape-html';
+import React from 'react';
+
+
 
 export const Contact = () => {
     const formInitialDetails = {
@@ -14,8 +18,9 @@ export const Contact = () => {
     const [buttonText, setButtonText] = useState("Send");
     const [status, setStatus] = useState({});
     const [verifed, setVerifed] = useState(false);
-    function onChange() {
+    function onChange(value) {
         setVerifed(true);
+        onFormUpdate("recaptchaResponse", value);
       }
 
     const onFormUpdate = (category, value) => {
@@ -25,10 +30,15 @@ export const Contact = () => {
         })
     }
 
+   
     const handleSubmit = async (e) => {
         setVerifed(false);
         e.preventDefault();
-
+        formDetails.firstName = escapeHtml(formDetails.firstName)
+        formDetails.lastName = escapeHtml(formDetails.lastName)
+        formDetails.email = escapeHtml(formDetails.email)
+        formDetails.phone = escapeHtml(formDetails.phone)
+        formDetails.message = escapeHtml(formDetails.message)
         setButtonText('Sending...');
         try {
             const response = await fetch("https://www.thomas-laize.online/contact", {
@@ -62,7 +72,7 @@ export const Contact = () => {
                     <Col md={6}>
                         <div className="wrapper text-center">
                         <form onSubmit={handleSubmit}>
-                            <h2>Send me an email !</h2>
+                            <h2>Contact me !</h2>
                             <Row>
                                 <Col sm={6} className="px-1 input-box">
                                     <i class='bx bx-user'></i>

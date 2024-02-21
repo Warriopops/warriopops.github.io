@@ -5,6 +5,8 @@ import navIcon1 from "../assets/img/nav-icon1.svg"
 import navIcon2 from "../assets/img/nav-icon2.svg"
 import navIcon3 from "../assets/img/nav-icon3.svg"
 import cv from "../assets/img/CV 2024.pdf"
+import React from 'react';
+
 
 export const NavBar = () => {
     const [activeLink, setActiveLink] = useState('home');
@@ -22,9 +24,7 @@ export const NavBar = () => {
 
     useEffect(() => {
         const onScroll = () => {
-            console.log("1")
             if (window.scrollY > 50) {
-                console.log("test")
                 seScrolled(true);
             } else {
                 seScrolled(false);
@@ -37,7 +37,7 @@ export const NavBar = () => {
         setActiveLink(value);
     }
     return (
-        <Navbar expand="lg" className={scrolled ? "scrolled": ""}>
+        <Navbar expand="lg" className="scrolled">
             <Container>
                 <Navbar.Brand href="#home">
                     <img src={logo} alt="Logo" width="80vw"></img>
@@ -56,7 +56,7 @@ export const NavBar = () => {
                         <div className="social-icon">
                             <a href="https://www.linkedin.com/in/thomas-laiz%C3%A9-b82b4516a/" target="_blank"><img src={navIcon1} alt="lien" /></a>
                             <a href="https://github.com/Warriopops" target="_blank"><img src={navIcon2} alt="lien" /></a>
-                            <a href="/warriopops" target="_blank"><img src={navIcon3} alt="lien" /></a>
+                            <a href="https://warriopops.github.io/" target="_blank"><img src={navIcon3} alt="lien" /></a>
                             <button className="btn btn-primary" onClick={() => handleDownload(cv)}>Download CV</button>
                         </div>
                     </span>
