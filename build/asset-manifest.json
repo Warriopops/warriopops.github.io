@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/static/css/main.bccf5579.chunk.css",
-    "main.js": "/static/js/main.d5b972c5.chunk.js",
-    "main.js.map": "/static/js/main.d5b972c5.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.e9aa9a8f.js",
-    "runtime-main.js.map": "/static/js/runtime-main.e9aa9a8f.js.map",
-    "static/css/2.e65e8715.chunk.css": "/static/css/2.e65e8715.chunk.css",
-    "static/js/2.6fc3fccb.chunk.js": "/static/js/2.6fc3fccb.chunk.js",
-    "static/js/2.6fc3fccb.chunk.js.map": "/static/js/2.6fc3fccb.chunk.js.map",
-    "static/js/3.affec2fc.chunk.js": "/static/js/3.affec2fc.chunk.js",
-    "static/js/3.affec2fc.chunk.js.map": "/static/js/3.affec2fc.chunk.js.map",
+    "main.js": "/static/js/main.e7659168.chunk.js",
+    "main.js.map": "/static/js/main.e7659168.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.aa5d154b.js",
+    "runtime-main.js.map": "/static/js/runtime-main.aa5d154b.js.map",
+    "static/css/2.e5c306b1.chunk.css": "/static/css/2.e5c306b1.chunk.css",
+    "static/js/2.73d2eebb.chunk.js": "/static/js/2.73d2eebb.chunk.js",
+    "static/js/2.73d2eebb.chunk.js.map": "/static/js/2.73d2eebb.chunk.js.map",
+    "static/js/3.4a3a605d.chunk.js": "/static/js/3.4a3a605d.chunk.js",
+    "static/js/3.4a3a605d.chunk.js.map": "/static/js/3.4a3a605d.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.123ccd46f85c5b8b8362e2aa45e67365.js": "/precache-manifest.123ccd46f85c5b8b8362e2aa45e67365.js",
+    "precache-manifest.e829f192ee06d042138ca9b4c0b59436.js": "/precache-manifest.e829f192ee06d042138ca9b4c0b59436.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.e65e8715.chunk.css.map": "/static/css/2.e65e8715.chunk.css.map",
+    "static/css/2.e5c306b1.chunk.css.map": "/static/css/2.e5c306b1.chunk.css.map",
     "static/css/main.bccf5579.chunk.css.map": "/static/css/main.bccf5579.chunk.css.map",
-    "static/js/2.6fc3fccb.chunk.js.LICENSE.txt": "/static/js/2.6fc3fccb.chunk.js.LICENSE.txt",
+    "static/js/2.73d2eebb.chunk.js.LICENSE.txt": "/static/js/2.73d2eebb.chunk.js.LICENSE.txt",
     "static/media/App.css": "/static/media/curled-black-chart-paper-dark-gray-background.a8477316.jpg",
     "static/media/CV 2024.pdf": "/static/media/CV 2024.07dced70.pdf",
     "static/media/logo-react.png": "/static/media/logo-react.b1f1cf58.png",
@@ -29,10 +29,10 @@
     "static/media/styles.css": "/static/media/revicons.2feb69cc.eot"
   },
   "entrypoints": [
-    "static/js/runtime-main.e9aa9a8f.js",
-    "static/css/2.e65e8715.chunk.css",
-    "static/js/2.6fc3fccb.chunk.js",
+    "static/js/runtime-main.aa5d154b.js",
+    "static/css/2.e5c306b1.chunk.css",
+    "static/js/2.73d2eebb.chunk.js",
     "static/css/main.bccf5579.chunk.css",
-    "static/js/main.d5b972c5.chunk.js"
+    "static/js/main.e7659168.chunk.js"
   ]
 }
