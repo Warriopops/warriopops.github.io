@@ -48,7 +48,7 @@ export const Banner = () => {
                             <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
                                 <span className="tagline">Hello World ! </span>
                                 <h1>{`I'm Thomas , `}<span className="wrap">{text}</span></h1>
-                                <p>My name is Thomas Laizé, and i've been passionate about computers since i was a kid. after training to become a web developer, i'm currently doing a work-study program at Kapsloc.</p>
+                                <p>My name is Thomas Laizé, and I’ve been passionate about computers since childhood. After completing the OpenClassrooms Full-Stack Web Developer training program, I am now pursuing a work-study program at Kapsloc</p>
                             </div>}
                         </TrackVisibility>
                     </Col>
